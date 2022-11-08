@@ -1,0 +1,239 @@
+body { 
+    margin:0; 
+    font-size:16px;
+    height:100%; 
+    padding:0; 
+    }
+
+header{
+     width: 100%;
+     height: 44px;
+    background-color: #13c459;
+}
+
+.logo{
+position: absolute;    
+width: 300px;
+height: 70px;
+left: 70px;
+top: 5px;
+font-family: 'BM HANNA_TTF';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 0px;
+color: #000000;
+}
+
+.Gato{
+position: absolute;    
+left: -60px;
+top: 2px;
+}
+
+.Perro{
+    position: absolute;    
+    left: -30px;
+    top: 2px;
+}
+
+/* menu */
+.Menu ul {
+ list-style:none;
+ margin:0;
+ padding:0;
+}
+
+/* enlaces del menu */
+.Menu ul a {
+ display:block; 
+ padding:12px 40px;
+ color:#ffffff;
+ text-decoration:none;
+ font-weight:400;
+ font-size:20px;
+ font-style: normal;
+ line-height: 18px;
+ font-family: 'BM HANNA_TTF';
+ text-align: right;
+}
+
+/* items del menu */
+.Menu ul li {
+ position:relative;
+ float:right;
+ margin:0;
+ padding:0;
+ line-height:100%;
+}
+
+/* efecto al pasar el ratón por los items del menu */
+.Menu ul li:hover {
+ background: rgba(0,0,0, 0.2);
+}
+
+/* menu desplegable */
+.Menu ul ul {
+ display:none;
+ position:absolute;
+ top:100%;
+ left:0;
+ padding:0;
+ background-color: #58D68D;
+}
+
+.Menu ul ul li {
+ float:center;
+ margin:0;
+ padding:0;
+ width: 100%;
+}
+
+.Menu ul ul a {
+ line-height:100%;
+}
+
+/* Para aparecer el submenu */
+.Menu ul li:hover > ul {
+ display:block;
+}
+
+/*  Flecha hacia abajo del menu desplegable */
+.Flecha{
+width: 15px;
+height: 17px;
+position: relative;    
+left: 5px;
+top: 3px;
+}
+
+/* estilo de las imagenes de las mascotas */  
+.item img{
+    width: 195px; 
+    height: 175px;
+}
+
+/* Contenedor de la imágenes de las mascotas*/
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  padding:  30px 0px 50px 50px;
+
+}
+
+/*  Estilos de las imágenes de las mascotas */
+.flex-container > div {
+  color: #000000;
+  background-color: #B7E9CB;
+  margin: 25px;
+  width: 195px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+/*  Estilos del botón Ver más */
+.BtnVerMas{
+    width: 195px;
+    height: 35px; 
+    text-align: center;
+    background-color:mediumseagreen;
+    color:#FFFFFF;
+    margin-bottom: -50;
+    border: none;
+
+}
+
+/* Estilos del contenedor de las mascotas */
+.mascota {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding:  30px 0px 50px 50px;
+
+}
+
+/*  Estilos de la targeta de imágene de las mascotas */
+.foto {
+  background-color: #5AAB71;
+  margin: 0px;
+  width: 350px;
+  height: 350px;
+  margin-bottom: 60px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.info {
+  background-color: #BCEBCF;
+  margin: 0px;
+  width: 350px;
+  height: 350px;
+  margin-bottom: 60px;
+  border-radius: 8px;
+}
+
+.foto img{
+    width: 280px;
+    height: 280px;
+    padding: 35px 20px;
+}
+
+.datos {
+    color: #000000;
+    text-align: left;
+    line-height: 6px;
+    width: 300px;
+    height: 110px;
+    margin: 25px;
+}
+
+.descrip {
+    color: #000000;
+    background-color: #ffffff;
+    text-align: left;
+    line-height: 100%;
+    width: 300px;
+    height: 90px;
+    margin: 25px;
+    font-family: 'BM HANNA_TTF';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.botones {
+    width: 300px;
+    height: 25px;
+    margin: 25px;
+    padding-top: 10px;
+}
+
+#btn_volver{
+    width: 140px;
+    height: 28px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 18px;
+    background:rgba(18, 140, 15, 0.58);;
+    border:none;
+    color:#ffffff;
+    border-radius: 8px;
+    float:right;
+
+
+}
+
+#btn_adoptar{
+    width: 140px;
+    height: 28px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 18px;
+    background:rgba(18, 140, 15, 0.58);;
+    border:none;
+    color:#ffffff;
+    border-radius: 8px;
+    float:left;
+
+}
