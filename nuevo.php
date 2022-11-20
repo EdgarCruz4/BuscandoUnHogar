@@ -37,37 +37,52 @@ Adoptar <img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA
 </nav>
 </header>
 <div class="modal">
+<div class="modal-content">
 <div class="content-left">
-
+<p>Subir Imagen</p>
 </div>
 <div class="content-right">
 <div class="content-header">
 <div class="content">
-<p id="modal-title">Inicio de sesion</p>
-<div class="footprint">
-<div class="user-icon"></div>
-</div>
+<p id="modal-title">Nuevo integrante</p>
 </div>
 </div>
 <div class="content-body">
 <form action="">
 <div class="form-content">
-<div>
-<div class="input-user"><label for="username">Usuario:</label></div>
-<br>
-<div class="input-pass"><label for="password">Contraseña:</label></div>
+<div class="labels">
+<label for="mascota">Mascota:</label>
+<label for="nombre">Nombre:</label>
+<label for="edad">Edad:</label>
+<label for="genero">Genero:</label>
+<label for="tamano">Tamaño:</label>
+<label for="descripcion">Descripcion:</label>
 </div>
 <div>
-<input name="username" type="text" placeholder="Juan">
-<br>
-<input name="password" type="password" placeholder="12345">
+<div class="especie">
+<input name="especie" type="radio" checked value="Perro">
+<label for="especie">Perro</label>
+<input name="especie" type="radio" value="Gato">
+<label for="especie">Gato</label>
+</div>
+<input name="nombre" type="text">
+<input name="edad" type="number" min="1" value="1">
+<select id="genero" name="genero">
+<option selected>Macho</option>
+<option selected>Hembra</option>
+</select>
+<input name="tamano" type="text">
+<input style="height: 30px; width: 200px;" name="descripcion" type="text">
 </div>
 </div>
 <div class="btn">
-<button type="submit" id="btn-submit">Entrar</button>
+<button type="reset" id="btn-reset">Cancelar</button>
+<button type="submit" id="btn-submit">Registrarse</button>
 </div>
 </form>
 </div>
+</div>
+
 </div>
 </div>
 </body>
