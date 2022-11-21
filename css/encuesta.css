@@ -10,7 +10,7 @@ body {
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 16384; /* Sit on top */
+  z-index: 1; /* Sit on top */
   left: 0px;
   top: 0px;
   width: 100%; /* Full width */
@@ -26,12 +26,12 @@ body {
 	background-color: rgb(0,0,0);
 	background-color: rgb(18, 140, 15, 0.58);
     align-items: center;
-	margin: 10% auto 5% auto;  /* top, left, bottom, right  */
+	margin: 64px auto auto auto;  /* top, left, bottom, right  */
     border: 1px solid  rgba(0,0,0,0.20);
-	width: 500px; /* Could be more or less, depending on screen size */
+	width: 550px; /* Could be more or less, depending on screen size */
 	box-shadow: -5px 10px 20px 1px rgba(0,0,0,0.25), inset 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
 	border-radius: 10px;
-    height: 350px;
+    height: auto;
     padding: 0px;
 }
 
@@ -47,41 +47,22 @@ body {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: rgba(5, 128, 54, 0.92);
-    width: 100%;
-    height: 162px;
+    
+    height: 120px;
     text-align: center;
     justify-content: center;
-    align-items:initial;
-}
+    align-items:center;
 
-.footprint {
-    height: 115px;
-    background-image: url("../Imagenes/login_footprint.png");
+    background-image: url("../Imagenes/header_encuesta.png");
     background-repeat: no-repeat;
-    background-position:center;
-    background-size: 95px;
-    margin-top: -10px;
-}
-
-.user-icon {
-    height: 85%;
-    width: 100%;
-    background-image: url("../Imagenes/user-circle.png");
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-size: 31px;
-}
-
-.content {
-    width: 100%;
-    height: 80px;
-    line-height: 0px;
-    align-items: initial;
-    justify-content: initial;
+    background-size:contain;
+    background-position: center;
+    background-blend-mode:soft-light;
 }
 
 #modal-title {
-    font-size: 32px;
+    color: white;
+    font-size: 36px;
     font-weight: 900;
 }
 
@@ -89,15 +70,15 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 180px;
+    height: 100%;
+    margin-top: 10px;
 }
 
 .form-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
-    gap: 0px;
-    width: 250px;
-    padding-left: 50px;
+    position: relative;
+    width:fit-content;
+    padding-left: 40px;
+    padding-right: 10px;
 }
 
 label {
@@ -116,60 +97,35 @@ input {
     width: 180px;
     border-radius: 8px;
     border: none;
-    padding-left: 20px;
-    height: 20px;
+    padding-left: 10px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .footer {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    left: 0;
     bottom: 0;
-    width: 100%;
+    height: 50px;
+    background-color: aqua;
 }
 
-#btn-submit {
+#btn-submit, #btn-cancel {
     border: none;
     background: none;
-    width: 120px;
-    height: 35px;
+    width: 110px;
+    height: 30px;
     background-color: rgb(18, 140, 15, 0.52);
     font-family: "BM-HANNA";
     color: white;
     border-radius: 8px;
     cursor: pointer;
-    border: 1px solid #000000;
 }
 
 .btn {
     display: flex;
-    justify-content: center;
+    justify-content:space-between;
     align-items: center;
-    margin-top: 20px;
-    height: fit-content;
-    width: 100%;
-}
-
-.input-user, .input-pass {
-    height: 20px;
-    width: 20px;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    padding-left: 25px;
-}
-
-.input-user {
-    background-image: url("../Imagenes/user-icon.png");
-}
-
-.input-pass {
-    background-image: url("../Imagenes/password-icon.png");
-}
-
-.modal-botton-bg {
-    width: 100%;
-    height: 100%;
-    position: sticky;
-    bottom: 0;
+    margin-top: 10px;
+    height: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
