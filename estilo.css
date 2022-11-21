@@ -1,111 +1,9 @@
 body { 
     margin:0; 
     font-size:16px;
-    height:100%; 
+    min-height: 100vh; 
     padding:0; 
     }
-
-header{
-     width: 100%;
-     height: 44px;
-    background-color: #13c459;
-}
-
-.logo{
-position: absolute;    
-width: 300px;
-height: 70px;
-left: 70px;
-top: 5px;
-font-family: 'BM HANNA_TTF';
-font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 0px;
-color: #000000;
-}
-
-.Gato{
-position: absolute;    
-left: -60px;
-top: 2px;
-}
-
-.Perro{
-    position: absolute;    
-    left: -30px;
-    top: 2px;
-}
-
-/* menu */
-.Menu ul {
- list-style:none;
- margin:0;
- padding:0;
-}
-
-/* enlaces del menu */
-.Menu ul a {
- display:block; 
- padding:12px 40px;
- color:#ffffff;
- text-decoration:none;
- font-weight:400;
- font-size:20px;
- font-style: normal;
- line-height: 18px;
- font-family: 'BM HANNA_TTF';
- text-align: right;
-}
-
-/* items del menu */
-.Menu ul li {
- position:relative;
- float:right;
- margin:0;
- padding:0;
- line-height:100%;
-}
-
-/* efecto al pasar el ratón por los items del menu */
-.Menu ul li:hover {
- background: rgba(0,0,0, 0.2);
-}
-
-/* menu desplegable */
-.Menu ul ul {
- display:none;
- position:absolute;
- top:100%;
- left:0;
- padding:0;
- background-color: #58D68D;
-}
-
-.Menu ul ul li {
- float:center;
- margin:0;
- padding:0;
- width: 100%;
-}
-
-.Menu ul ul a {
- line-height:100%;
-}
-
-/* Para aparecer el submenu */
-.Menu ul li:hover > ul {
- display:block;
-}
-
-/*  Flecha hacia abajo del menu desplegable */
-.Flecha{
-width: 15px;
-height: 17px;
-position: relative;    
-left: 5px;
-top: 3px;
-}
 
 /* estilo de las imagenes de las mascotas */  
 .item img{
@@ -118,8 +16,9 @@ top: 3px;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  padding:  30px 0px 50px 50px;
-
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
 }
 
 /*  Estilos de las imágenes de las mascotas */
@@ -237,3 +136,90 @@ top: 3px;
     float:left;
 
 }
+
+
+
+.card-section{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(264px,0fr));
+    margin: 20px;
+
+}
+
+.card{
+    background-color:#B7E9CB;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card .card-header{
+    flex-basis: 100%;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.card .card-body{
+    flex-basis: 100%;
+    padding: 1rem;
+
+}  
+
+.card .card-body p {
+    margin: 0;
+
+}
+
+.card .card-body a{
+    margin-left: 0.5rem;
+    text-decoration: none;
+    color: #FFFFFF;
+    display: inline-block;
+    padding: 0.7rem 1.75rem;
+    border: 1px solid transparent;
+    background-color: mediumseagreen;
+    border-radius: 0.5rem;
+    margin-top: 1.2rem;
+    transition: background-color 0.4s ease-in, color 0.4s ease-in;
+}
+
+.card .card-body a:hover{
+    background-color: #13c459;
+    border-color: transparent;
+    color:white;
+}
+
+.card .card-header img {
+    margin: 0%;
+    width: 100%;
+    flex-basis: 100%;
+}
+
+.container{
+    padding: 2rem 15rem;
+    background-color: #13c459;
+}
+
+#map{
+    height: 500px;
+    width: 100%;
+}
+
+
+.card-section-direction{
+    display: grid;
+    text-align: center;
+    margin: 20px;
+
+}
+
+.card-direction{
+    background-color:#B7E9CB;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-direction .card-body{
+    flex-basis: 100%;
+    padding: 1rem;
+
+}  
