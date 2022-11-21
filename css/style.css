@@ -1,0 +1,51 @@
+body { 
+    margin:0; 
+    font-size:16px;
+    height:100%; 
+    padding:0;
+    background-color:#B7E9CB;
+    }
+
+header{
+     width: 100%;
+     height: 44px;
+     background-color: #13c459;
+     line-height: 44px;
+     display: inline-flex;
+}
+
+.logo{
+display:flex;
+align-items: center;
+font-family: 'BM HANNA_TTF';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 44px;
+color: #000000;
+}
+
+.gato, .perro {
+    background-repeat: no-repeat;
+    width: 40px;
+    height: 40px;
+}
+.gato{
+    background-size: 50px;
+    background-position:top;
+    background-image: url("../Imagenes/icon_gato.png");
+}
+
+.perro{
+    margin-right: 20px;
+    background-position: bottom;
+    background-size: 40px;
+    background-image: url("../Imagenes/icon_perro.png");
+}
+
+.modal {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
