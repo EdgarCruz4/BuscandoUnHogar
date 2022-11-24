@@ -31,7 +31,7 @@ if (isset($_POST['btn-update'])) {
         alert("Registro actualizado.");
         </script>
         ');
-        header('Refresh: 0; URL = catalogo.php?donacion=' . $_POST['tipo']);
+        header('Refresh: 0; URL = catalogo.php?catalogo=gatos');
     }
 }
 ?>
