@@ -1,5 +1,38 @@
 <?php
+session_start();
+if (!isset($_SESSION['valid'])) {
+    header('Refresh: 0; URL = index.php');
+}
 $donacion = $_POST["donacion"];
+require_once("backend/function.php");
+if(isset($_POST['tipo']) && !isset($_POST['btn-update'])) {
+    $sql = insert('donaciones', $_POST);
+    if ($sql)
+        echo ('
+        <script>
+        alert("Donacion registrada correctamente.");
+        </script>
+        ');
+    else
+        echo ('
+        <script>
+        alert("Ocurrio un error al realizar su registro.\nPor favor vuelva a intertarlo.");
+        </script>
+        ');
+}
+if (isset($_POST['btn-update'])) {
+    $id = $_POST['btn-update'];
+    unset($_POST['btn-update']);
+    $sql = update('donaciones', $_POST, "id='" . $id . "'");
+    if (isset($sql)) {
+        echo ('
+        <script>
+        alert("Registro actualizado.");
+        </script>
+        ');
+        header('Refresh: 0; URL = catalogo.php?donacion=' . $_POST['tipo']);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,34 +59,104 @@ $donacion = $_POST["donacion"];
 <?php
 if ($donacion == "economico")
 {
+    $id = "";
+    $nombre = "";
+    $cantidad = "";
+    $fecha = "";
+    if (isset($_POST["btn-edit"]))
+    {
+        require_once("backend/function.php");
+        $row = query("donaciones", 'id', $_POST['btn-edit']);
+        $id = $row->id;
+        $nombre = $row->Nombre;
+        $cantidad = $row->Cantidad;
+        $fecha = $row->Fecha;
+    }
 ?>
 <div class="content-header">
 <p id="modal-title">Donaciones Económicas</p>
 </div>
-<form action="">
+<form action="donaciones.php" method="POST">
 <div class="form-content">
  
 <table class="table">
 <tr>
-<td class="label"><label for="input_1">Nombre:</label></td>  
-<td><input name="input_1"  required></td> 
+<td class="label"><label for="nombre">Nombre:</label></td>  
+<td><input name="nombre" value="<?php echo $nombre; ?>" required></td> 
 </tr>
 <tr>
-<td class="label"><label for="input_2">Producto:</label></td> 
-<td><input name="input_2" required></td> 
+<td class="label"><label for="cantidad">Cantidad:</label></td> 
+<td><input name="cantidad" type="number" value="<?php echo $cantidad; ?>" required></td> 
 </tr>
 <tr>
-<td class="label"><label for="input_3">Fecha:</label></td> 
-<td><input name="input_3" required></td> 
+<td class="label"><label for="fecha">Fecha:</label></td>
+<td><input name="fecha" type="datetime-local" value="<?php echo $fecha; ?>" required></td> 
 </tr>
 </table>
 </div>
 <div class="btn">
-<button type="submit" id="btn-submit">Registrar</button>
-<button type="button" id="btn-cancel">Cancelar</button>
+<input type="hidden" name="tipo" value="economico">
+<?php
+if (isset($_POST['btn-edit'])) {
+?>
+<button type="submit" class="btn-action" id="btn-submit" name="btn-update" value="<?php echo($id); ?>">Actualizar</button>
+<?php } else {?>
+<button type="submit" class="btn-action" id="btn-submit">Registrar</button>
+<?php }?>
+<button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?donacion=economico'">Cancelar</button>
 </div>
 </form>
+<?php }
+else {
+    $nombre = "";
+    $especie = "";
+    $cantidad = "";
+    if (isset($_POST["btn-edit"]))
+    {
+        require_once("backend/function.php");
+        $row = query("donaciones", 'id', $_POST['btn-edit']);
+        $id = $row->id;
+        $nombre = $row->Nombre;
+        $especie = $row->Especie;
+        $cantidad = $row->Cantidad;
+    }
+?>
+<div class="content-header">
+<p id="modal-title">Donaciones en Especie</p>
+</div>
+<form action="donaciones.php" method="POST">
+<div class="form-content">
+ 
+<table class="table">
+<tr>
+<td class="label"><label for="nombre">Nombre:</label></td>  
+<td><input name="nombre" value="<?php echo($nombre); ?>"  required></td> 
+</tr>
+<tr>
+<td class="label"><label for="especie">Especie:</label></td> 
+<td><input name="especie" value="<?php echo($especie); ?>" required></td> 
+</tr>
+<tr>
+<td class="label"><label for="cantidad">Cantidad:</label></td> 
+<td><input name="cantidad" value="<?php echo($cantidad); ?>" required></td> 
+</tr>
+</table>
+</div>
+<div class="btn">
+<input type="hidden" name="tipo" value="especie">
+<?php
+if (isset($_POST['btn-edit'])) {
+?>
+<button type="submit" class="btn-action" id="btn-submit" name="btn-update" value="<?php echo($id); ?>">Actualizar</button>
+<?php } else {?>
+<button type="submit" class="btn-action" id="btn-submit">Registrar</button>
 <?php }?>
+<button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?donacion=especie'">Cancelar</button>
+</div>
+</form>
+<?php
+}
+?>
 </div>
 <div class="footer"><img width="300" src="./Imagenes/footer_donaciones.png" alt=""></div>
 </div>

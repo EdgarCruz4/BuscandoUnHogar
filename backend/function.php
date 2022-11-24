@@ -2,7 +2,7 @@
 /**
  * external configuration file
  */
-require_once('./backend/config.php');
+require_once('config.php');
 /**
  * @param string $query
  * init the connection then
@@ -24,7 +24,7 @@ function db_query($query)
 function insert($table, $array_data)
 {
     $fields = array_keys($array_data);
-    $sql = "INSERT INTO " . $table . "(" . implode(',', $fields) . ")  VALUES('" . implode("','", $array_data) . "')";
+    $sql = 'INSERT INTO ' . $table . '(' . implode(',', $fields) . ")  VALUES('" . implode("','", $array_data) . "')";
     return db_query($sql);
 }
 /**
@@ -48,7 +48,32 @@ function buildString($array_data)
  */
 function update($table, $array_data, $condition)
 {
-    $sql = "UPDATE " . $table . " SET " . buildString($array_data) . " WHERE " . $condition;
+    $sql = 'UPDATE ' . $table . ' SET ' . buildString($array_data) . ' WHERE ' . $condition;
+    $db = db_query($sql);
+    return $db;
+}
+/**
+ * @param string $table
+ * @param string $field_name
+ * @param string $field_value
+ * Excecutes a query with the especified condition: $field_name = $field_value
+ * Returns the current row of a result set as an object
+ */
+function delete($table, $field_name, $field_value)
+{
+    $sql = 'DELETE FROM ' . $table . ' WHERE ' . $field_name . ' = "' . $field_value . '"';
+    $db = db_query($sql);
+    return @mysqli_fetch_object($db);
+}
+/**
+ * @param string $table
+ * @param string $id
+ * Deletes a row with the especified condition: id = $id
+ * Returns the current row of a result set as an object
+ */
+function deleteByID($table, $id)
+{
+    $sql = 'DELETE FROM ' . $table . ' WHERE id = "' . $id . '"';
     $db = db_query($sql);
     return $db;
 }
@@ -73,7 +98,7 @@ function query($table, $field_name, $field_value)
  */
 function queryAll($table, $flags = '')
 {
-    $sql = "SELECT * FROM " . $table . " " . $flags;
+    $sql = 'SELECT * FROM ' . $table . ' ' . $flags;
     $db = db_query($sql);
     return $db;
 }

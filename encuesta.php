@@ -1,4 +1,9 @@
-
+<?php
+session_start();
+if (!isset($_SESSION['valid'])) {
+    header('Refresh: 0; URL = index.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +19,7 @@
 <div class="perro"></div>
 <h1>Buscando Un Hogar</h1>
 </div>
-<nav class="menu">
+<!-- <nav class="menu">
 <ul>
 <li>
 <a href="#">
@@ -35,7 +40,7 @@
 </ul>
 </li>
 </ul>
-</nav>
+</nav> -->
 </header>
 <div class="modal">
 <div class="modal-content">
