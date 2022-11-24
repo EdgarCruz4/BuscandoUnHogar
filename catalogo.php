@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['valid'])) {
     header('Refresh: 0; URL = index.php');
-}
+} else {
 $catalogo = $_GET['catalogo'];
 require_once("backend/function.php");
 if (isset($_POST["btn-delete"])) {
@@ -219,3 +219,6 @@ document.getElementById('donacion-economica').style.display = 'block';
 </script>
 </body>
 </html>
+<?php 
+}
+?>

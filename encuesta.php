@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['valid'])) {
     header('Refresh: 0; URL = index.php');
-}
+} else {
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,3 +107,6 @@ if (!isset($_SESSION['valid'])) {
 </div>
 </body>
 </html>
+<?php
+}
+?>
