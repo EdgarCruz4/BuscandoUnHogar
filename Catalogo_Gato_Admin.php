@@ -59,7 +59,7 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
         <div class="item">
               <b>
                      <p>
-                            <?php echo $row->Nombre; ?>
+                            <?php echo $row->Nombre ; ?>
                      </p>
                      <p>
                             <?php echo $row->Genero; ?>
