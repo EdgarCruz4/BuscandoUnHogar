@@ -33,7 +33,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION['username'] = $user;
         unset($pass);
         unset($_POST['password']);
-        header('Refresh: 2; URL = index.php');
+        header('Refresh: 0; URL = index.php');
     } else {
         $msg = 'Usuario y/o contraseña incorrectos.';
         echo('

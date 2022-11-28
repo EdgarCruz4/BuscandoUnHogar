@@ -16,11 +16,14 @@ if (isset($_POST["btn-delete"])) {
 else if (isset($_POST['btn-admin-delele']))
 {
     $sql = deleteByID("mascotas", $_POST['btn-admin-delele']);
-    if (isset($sql)) echo('
-    <script>
-    alert("Registro borrado con exito!.");
-    </script>
-    ');
+    if (isset($sql)) {
+        echo('
+        <script>
+        alert("Registro borrado con exito!.");
+        </script>
+        ');
+        header('Refresh: 0; URL = index.php');
+    }
 }
 ?>
 <!DOCTYPE >
@@ -30,7 +33,7 @@ else if (isset($_POST['btn-admin-delele']))
 <title>Catálogo de perros</title>
 <link rel="stylesheet" type="text/css" href="css/navbar.css">
 <link rel="stylesheet" type="text/css" href="css/modal.css">
-<link rel="stylesheet" type="text/css" href="estilo.css">
+<link rel="stylesheet" type="text/css" href="css/catalogo.css">
 </head>
 
 <body>
@@ -158,7 +161,9 @@ Donaciones <img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 </div>
 </div>
 
-<div class="flex-container" >
+<div class="cards-container">
+<!-- Cards -->
+<section class="cards">
 <?php
 require_once('./backend/function.php'); 
 if ($catalogo == 'perros') {
@@ -170,37 +175,36 @@ else if ($catalogo == 'gatos') {
 
 while ($row = mysqli_fetch_object($rows)) { // draw each row returned
 ?>
-<section class="card-section">
 <div class="card">
 <div class="card-header">
 <img src="Imagenes/Metri.PNG">
 </div>
 
 <div class="card-body" >
-<div class="item">
-<b><p><?php echo $row->Nombre; ?></p><p>
-<b><p><?php echo $row->Genero; ?></p></b>
-</div>
+<p><?php echo $row->Nombre; ?></p>
+<p><?php echo $row->Genero; ?></p>
 <div class="btns">
 <form action="nuevo.php" method="POST">
-<button type="submit" name="btn-admin-edit" value="<?php echo($row->id);?>">Editar</button>
+<button type="submit" name="update-item" value="<?php echo($row->id);?>">Editar</button>
 </form>
 <form action="catalogo.php" method="POST" onsubmit="return confirm('Confirmar?');">
 <button type="submit" name="btn-admin-delele" value="<?php echo($row->id);?>">Eliminar</button>
 </form>
 </div>
+
+
 </div>
 </div>
-</section>
 <?php
 }
 ?>
+</section>
 </div>
 
 <!-- Footer -->
-<div class="container" >
+<footer class="container" >
 <span>Todos los derechos reservados ®2022, prohibidad su reproducción total o parcial sin autorización.</span>
-</div>
+</footer>
 
 <script>
 function closeModal() {

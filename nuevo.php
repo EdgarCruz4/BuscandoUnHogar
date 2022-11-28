@@ -4,6 +4,57 @@ if (!isset($_SESSION['valid'])) {
     header('Refresh: 0; URL = index.php');
 }
 else {
+    require_once('backend/function.php');
+    $id = '';
+    $nombre = '';
+    $especie = '';
+    $edad = '';
+    $genero = '';
+    $tamano = '';
+    $descripcion = '';
+
+    if (isset($_POST['update-item'])) {
+        $id = $_POST['update-item'];
+        $row = query('mascotas', 'id', $id);
+        if ($row) {
+            $nombre = $row->Nombre;
+            $especie = $row->Especie;
+            $edad = $row->Edad;
+            $genero = $row->Genero;
+            $tamano = $row->Tamano;
+            $descripcion = $row->Descripcion;
+        }
+    } elseif (isset($_POST['btn-update'])) {
+        $id = $_POST['btn-update'];
+        unset($_POST['btn-update']);
+        $sql = update('mascotas', $_POST, "id='" . $id . "'");
+        $message = '';
+        if (isset($sql)) {
+            $message = 'Registro actualizado';
+        } else {
+            $message = 'Ocurrio un error al actualizar el registro.\nPor favor intenta de nuevo.';
+        }
+        echo('
+            <script>
+            alert("'. $message .'");
+            </script>
+            ');
+            header('Refresh: 0; URL = index.php');
+    } elseif (isset($_POST['btn-submit'])) {
+        unset($_POST['btn-submit']);
+        $sql = insert('mascotas', $_POST);
+        $message = '';
+        if (isset($sql)) {
+            $message = 'Registro agregado';
+        } else {
+            $message = 'Ocurrio un error al hacer el registro.\nPor favor intenta de nuevo.';
+        }
+        echo('
+            <script>
+            alert("'. $message .'");
+            </script>
+            ');
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +84,7 @@ else {
 </div>
 </div>
 <div class="content-body">
-<form action="">
+<form action="nuevo.php" method="POST" onsubmit="return confirm('Confirmar?');">
 <div class="form-content">
 <div class="labels">
 <label for="mascota">Mascota:</label>
@@ -45,24 +96,33 @@ else {
 </div>
 <div>
 <div class="especie">
-<input name="especie" type="radio" checked value="Perro">
+<input name="especie" type="radio" <?php echo($especie == 'perro' ? 'checked' : ''); ?> value="perro">
 <label for="especie">Perro</label>
-<input name="especie" type="radio" value="Gato">
+<input name="especie" type="radio" <?php echo($especie == 'gato' ? 'checked' : ''); ?> value="gato">
 <label for="especie">Gato</label>
 </div>
-<input name="nombre" type="text">
-<input name="edad" type="number" min="1" value="1">
+<input name="nombre" type="text" value="<?php echo($nombre); ?>">
+<input name="edad" type="number" min="1" value="<?php echo($edad); ?>">
 <select id="genero" name="genero">
-<option selected>Macho</option>
-<option selected>Hembra</option>
+<option <?php echo($genero == 'Macho' ? 'selected' : ''); ?>>Macho</option>
+<option <?php echo($genero == 'Hembra' ? 'selected' : ''); ?>>Hembra</option>
 </select>
-<input name="tamano" type="text">
-<input style="height: 30px; width: 200px;" name="descripcion" type="text">
+<input name="tamano" type="text" value="<?php echo($tamano); ?>">
+<input style="height: 30px; width: 200px;" name="descripcion" type="text" value="<?php echo($descripcion); ?>">
 </div>
 </div>
 <div class="btn">
-<button type="reset" id="btn-reset">Cancelar</button>
-<button type="submit" id="btn-submit">Registrarse</button>
+<button type="reset" onclick="window.location.href = 'index.php'" id="btn-reset">Cancelar</button>
+<?php
+if (isset($_POST['update-item'])) {?>
+    <button type="submit" name="btn-update" value="<?php echo($id);?>">Actualizar</button>
+<?php
+} else {
+?>
+    <button type="submit" name="btn-submit" value="insert">Registrar</button>
+<?php
+}
+?>
 </div>
 </form>
 </div>
@@ -70,6 +130,8 @@ else {
 
 </div>
 </div>
+<script>
+</script>
 </body>
 </html>
 <?php

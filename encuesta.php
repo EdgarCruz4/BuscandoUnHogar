@@ -3,6 +3,22 @@ session_start();
 if (!isset($_SESSION['valid'])) {
     header('Refresh: 0; URL = index.php');
 } else {
+    require_once('backend/function.php');
+    if (isset($_POST['nombre'])) {
+        $nombre = $_POST['nombre'] . ' ' . $_POST['ap'] . ' ' . $_POST['am'];
+        $_POST['nombre'] = $nombre;
+        unset($_POST['ap']);
+        unset($_POST['am']);
+        $sql = insert('adopciones', $_POST);
+        $msg = 'Adopcion registrada.';
+        if (!isset($sql)) {
+            $msg = 'Ocurrio un error al hacer su registro.\nPor favor vuelva a intentar de nuevo.';
+        }
+        echo('
+            alert("'. $msg . '");
+            ');
+        die(0);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,28 +35,6 @@ if (!isset($_SESSION['valid'])) {
 <div class="perro"></div>
 <h1>Buscando Un Hogar</h1>
 </div>
-<!-- <nav class="menu">
-<ul>
-<li>
-<a href="#">
-<span>Donaciones </span><img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOBJREFUSEvtlN0NwjAMhH2b0E3oJjAJMAlsQjehmxwyElHS5sdJyBt+q+r44u/sQAYHBteXv0CRsENE8i4ip+IJW8IDwFlTfYGXiBxs54tZK4BpK6DFnz8SmQEsgYB+kLyKyKV4v3zCDYDW+cRuTEn2oHJocgI9qCYAq99gdNEaUQVokh18f5BUw49GPxYAcyw3+VSQtKLacS8i8rqwTJUbyaoOjCJuY1MoTa9pYnSzaIom+zciqWar6X5k0VQJRLY8OpJNHmw60S1XNNGR7BYw7kSQZjK5pXC1B60iwzt4A/3qSxkbGxzrAAAAAElFTkSuQmCC" />
-</a>
-<ul>
-<li><a href="CatalogoGato.php">Gato</a></li>
-<li><a href="CatalogoPerro.php">Perro</a></li>
-</ul>
-</li>
-<li>
-<a href="#">
-<span>Adoptar</span><img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOBJREFUSEvtlN0NwjAMhH2b0E3oJjAJMAlsQjehmxwyElHS5sdJyBt+q+r44u/sQAYHBteXv0CRsENE8i4ip+IJW8IDwFlTfYGXiBxs54tZK4BpK6DFnz8SmQEsgYB+kLyKyKV4v3zCDYDW+cRuTEn2oHJocgI9qCYAq99gdNEaUQVokh18f5BUw49GPxYAcyw3+VSQtKLacS8i8rqwTJUbyaoOjCJuY1MoTa9pYnSzaIom+zciqWar6X5k0VQJRLY8OpJNHmw60S1XNNGR7BYw7kSQZjK5pXC1B60iwzt4A/3qSxkbGxzrAAAAAElFTkSuQmCC" />
-</a>
-<ul>
-<li><a href="CatalogoGato.php">Gato</a></li>
-<li><a href="CatalogoPerro.php">Perro</a></li>
-</ul>
-</li>
-</ul>
-</nav> -->
 </header>
 <div class="modal">
 <div class="modal-content">
@@ -48,63 +42,110 @@ if (!isset($_SESSION['valid'])) {
 <p id="modal-title">Encuesta</p>
 </div>
 <div class="content-body">
-<form action="">
+<form action="" method="POST">
 <div class="form-content">
 <table>
 <tr>
-      <td width="204"><label for="nombre">Nombre(S):</label></td>  
-       <td width="204"><input id="nombre" name="nombre"  required></td> 
+        <td><label for="nombre">Nombre(S):</label></td>  
+        <td><input name="nombre" pattern="[A-Za-z]*" minlength="1" autofocus></td> 
 </tr>
 <tr>
-        <td width="204"><label for="AP">Apellido Paterno:</label></td> 
-        <td width="204"><input id="AP" name="AP" required></td> 
+        <td><label for="ap">Apellido Paterno:</label></td> 
+        <td><input name="ap" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>
-       <td width="204"> <label for="AM">Apellido Materno:</label></td> 
-        <td width="204"> <input id="AM" name="AM"   required></td> 
+        <td><label for="am">Apellido Materno:</label></td> 
+        <td><input name="am" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>
-        <td width="204"><label for="CN">Calle y No.:</label></td> 
-        <td width="204"> <input id="CN" name="CN"  required></td> 
+        <td><label for="calle">Calle y No.:</label></td> 
+        <td><input name="calle" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>
-        <td width="204"><label for="col">Colonia:</label></td> 
-        <td width="204"> <input id="col" name="col"  required></td> 
+        <td><label for="colonia">Colonia:</label></td> 
+        <td><input name="colonia" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>      
-        <td width="204"> <label for="ALMU">Alcaldia/Municipio:</label></td> 
-        <td width="204"> <input id="ALMU" name="ALMU"  required></td> 
+        <td><label for="municipio">Alcaldia/Municipio:</label></td> 
+        <td><input name="municipio" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>       
-        <td width="204"> <label for="ES">Estado:</label></td> 
-        <td width="204"><input id="ES" name="ES"  required></td> 
+        <td><label for="estado">Estado:</label></td> 
+        <td><input name="estado" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>        
-        <td width="204"><label for="tele">Teléfono:</label></td> 
-        <td width="204"><input id="tele" name="tele"  required></td> 
+        <td><label for="telefono">Teléfono:</label></td> 
+        <td><input name="telefono" pattern="[0-9]*" minlength="10"></td> 
 </tr>
 <tr>      
-        <td width="204"><label for="ingre">Ingresos:</label></td> 
-        <td width="204"><input id="ingre" name="ingre" required></td> 
+        <td><label for="ingresos">Ingresos:</label></td> 
+        <td><input name="ingresos" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>    
-        <td width="204"><label for="moti">Motivo de la adopción:</label></td> 
-        <td width="204"><input id="moti" name="moti" required></td> 
+        <td><label for="motivo">Motivo de la adopción:</label></td> 
+        <td><input name="motivo" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 <tr>       
-        <td width="204"><label for="espa">Espacio para la mascota:</label></td> 
-        <td width="204"><input id="espa" name="espa"  required></td> 
+        <td><label for="espacio">Espacio para la mascota:</label></td> 
+        <td><input name="espacio" pattern="[A-Za-z]*" minlength="1"></td> 
 </tr>
 </div>
 </table> 
 </div>
 <div class="btn">
-<button type="button" id="btn-cancel">Cancelar</button>
-<button type="submit" id="btn-submit">Enviar</button>
+<button type="button" onclick="window.location.href = 'index.php'" id="btn-cancel">Cancelar</button>
+<button type="button" id="btn-submit">Enviar</button>
 </div>
 </form>
 </div>
 </div>
+<script>
+
+let inputs = document.querySelectorAll('input');
+inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+    input.style.border = "none";
+});
+});
+
+document.getElementById('btn-submit').addEventListener('click', (e) => {
+    inputs = document.querySelectorAll('input');
+    let i = 0;
+    let isEmpty = false;
+    var formData = new FormData();
+    inputs.forEach(input => {
+        i++;
+        if (input.value.trim().length != 0) {
+            formData.append(input.name, input.value.trim());
+        } else {
+            input.style.border = "1px solid #FF0000";
+            input.setAttribute('isvalid', 'false');
+            isEmpty = true;
+        }
+        if (i == inputs.length && !isEmpty) {
+            fetch('encuesta.php', { method: 'POST', body: formData })
+            .then(function (response) {
+                if (!response.ok) {
+                    alert('error');
+                }
+                else return response.text();})
+            .then(function (body) {
+                const tag = document.createElement("script");
+                const script = document.createTextNode(body);
+                tag.appendChild(script);
+                document.body.appendChild(tag);
+                setTimeout(document.body.removeChild(tag), 1000);
+             });
+        }
+    });
+});
+
+// fetch('encuesta.php').then(function(response) {
+//     return response.text().then(function(text) {
+//         alert(text);
+//     });
+// });
+</script>
 </body>
 </html>
 <?php

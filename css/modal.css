@@ -2,7 +2,7 @@ body {
   color: black;
   background-image: url("../Imagenes/bg.png");
   background-repeat: no-repeat;
-  background-color: green;
+  background-color: white;
   background-size: cover;
 }
 .modal {
