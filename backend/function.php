@@ -63,7 +63,7 @@ function delete($table, $field_name, $field_value)
 {
     $sql = 'DELETE FROM ' . $table . ' WHERE ' . $field_name . ' = "' . $field_value . '"';
     $db = db_query($sql);
-    return @mysqli_fetch_object($db);
+    return $db;
 }
 /**
  * @param string $table

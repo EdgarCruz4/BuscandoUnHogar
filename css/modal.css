@@ -2,13 +2,13 @@ body {
   color: black;
   background-image: url("../Imagenes/bg.png");
   background-repeat: no-repeat;
-  background-color: green;
+  background-color: white;
   background-size: cover;
 }
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 4096; /* Sit on top */
   left: 0px;
   top: 0px;
   width: 100%; /* Full width */
@@ -191,5 +191,5 @@ caption {
 }
 
 #donacion-especie {
-  display: block;
+  display: none;
 }

@@ -129,3 +129,14 @@ input {
     padding-left: 50px;
     padding-right: 50px;
 }
+
+input:invalid {
+    animation: shake 300ms;
+    box-shadow: 0px 0px 8px 1px rgba(255, 0, 0, 0.80);
+}
+
+@keyframes shake {
+    25% { transform: translateX(4px); }
+    50% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
