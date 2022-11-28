@@ -2,13 +2,13 @@ body {
   color: black;
   background-image: url("../Imagenes/bg.png");
   background-repeat: no-repeat;
-  background-color: green;
+  background-color: white;
   background-size: cover;
 }
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 4096; /* Sit on top */
   left: 0px;
   top: 0px;
   width: 100%; /* Full width */
@@ -69,12 +69,12 @@ body {
   width: 100%;
 }
 
-form {
+/* form {
   margin-top: 0px;
   padding-left: 20px;
   padding-right: 20px;
   color: white;
-}
+} */
 
 table {
   border-collapse: collapse;
@@ -82,6 +82,7 @@ table {
   border-right: 1px solid rgba(0, 0, 0, 0.2);
   caption-side: top;
   width: 100%;
+  font-size: 14px;
 }
 
 th,
@@ -123,19 +124,27 @@ caption {
 }
 
 .actions {
-    width: 120px;
+  width: 20px;
 }
 
-.btn {
+.btn-actions {
   display: flex;
-  justify-content:center;
-  align-items: center;
-  margin-top: 10px;
-  height: 50px;
-  margin-bottom: 20px;
+  font-size: 1px;
+  justify-content: center;
+  border: none;
+  width: 100%;
 }
 
-.table td > button {
+.btn-actions > form {
+  padding: 0px;
+  padding: 1px;
+  margin: 0;
+  border: none;
+  width: 100%;
+}
+
+.btn-action {
+  display: inline;
   border: none;
   background: none;
   width: 55px;
@@ -145,6 +154,15 @@ caption {
   color: white;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.btn {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  margin-top: 10px;
+  height: 50px;
+  margin-bottom: 20px;
 }
 
 .btn > button {
@@ -166,4 +184,12 @@ caption {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100px;
+}
+
+#donacion-economica {
+  display: none;
+}
+
+#donacion-especie {
+  display: none;
 }

@@ -2,6 +2,6 @@
 $host     = 'localhost';
 $dbname   = 'buscandounhogar';
 $username = 'root';
-$password = 'root';
+$password = '';
 $port     = 3306;
 ?>

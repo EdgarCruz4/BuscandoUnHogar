@@ -64,7 +64,7 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
                      </p>
               </b>
        </div>
-       <a href="InfoMascotas/infoMetri.html">
+       <a  href="editarMascota.php">
                     Editar
               </a>
               <a href="InfoMascotas/infoMetri.html">
