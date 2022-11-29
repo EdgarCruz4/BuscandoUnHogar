@@ -109,7 +109,7 @@ form {
     justify-content: center;
 }
 
-.btn-action {
+#btn-submit, #btn-cancel {
     border: none;
     background: none;
     width: 110px;

@@ -75,7 +75,7 @@ function deleteByID($table, $id)
 {
     $sql = 'DELETE FROM ' . $table . ' WHERE id = "' . $id . '"';
     $db = db_query($sql);
-    return @mysqli_fetch_object($db);
+    return $db;
 }
 /**
  * @param string $table
