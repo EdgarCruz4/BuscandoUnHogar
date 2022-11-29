@@ -12,6 +12,15 @@ else {
     $genero = '';
     $tamano = '';
     $descripcion = '';
+    $foto = null;
+
+    if (count($_FILES) > 0) {
+        if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
+            $imgData = file_get_contents($_FILES['foto']['tmp_name']);
+            $imgType = $_FILES['foto']['type'];
+            $_POST['Foto'] = addslashes($imgData);
+        }
+    }
 
     if (isset($_POST['update-item'])) {
         $id = $_POST['update-item'];
@@ -23,6 +32,7 @@ else {
             $genero = $row->Genero;
             $tamano = $row->Tamano;
             $descripcion = $row->Descripcion;
+            $foto = $row->Foto;
         }
     } elseif (isset($_POST['btn-update'])) {
         $id = $_POST['btn-update'];
@@ -49,11 +59,11 @@ else {
         } else {
             $message = 'Ocurrio un error al hacer el registro.\nPor favor intenta de nuevo.';
         }
-        echo('
-            <script>
-            alert("'. $message .'");
-            </script>
-            ');
+        echo ('
+        <script>
+        alert("' . $message . '");
+        </script>
+        ');
     }
 ?>
 <!DOCTYPE html>
@@ -75,7 +85,18 @@ else {
 <div class="modal">
 <div class="modal-content">
 <div class="content-left">
-<p>Subir Imagen</p>
+<label onclick="openFile();">
+<?php
+if (isset($_POST['update-item'])) {?>
+<img src="data:image/jpeg;base64,<?php echo(base64_encode($foto))?>" id="thumbnail" alt="Subir imagen" style="width: 100%; height: 100%;">
+<?php
+} else {
+?>
+<img src="" id="thumbnail" alt="Subir imagen" style="width: 100%; height: 100%;">
+<?php
+}
+?>
+</label>
 </div>
 <div class="content-right">
 <div class="content-header">
@@ -84,7 +105,8 @@ else {
 </div>
 </div>
 <div class="content-body">
-<form action="nuevo.php" method="POST" onsubmit="return confirm('Confirmar?');">
+<form id="form" action="nuevo.php" method="POST" onsubmit="return confirm('Confirmar?');" enctype="multipart/form-data">
+<input type="file" name="foto" id="upload-photo">
 <div class="form-content">
 <div class="labels">
 <label for="mascota">Mascota:</label>
@@ -127,10 +149,35 @@ if (isset($_POST['update-item'])) {?>
 </form>
 </div>
 </div>
-
 </div>
 </div>
 <script>
+let form = document.getElementById("form");
+let file = document.getElementById("upload-photo");
+let thumbnail = document.getElementById("thumbnail");
+const reader = new FileReader();
+
+function openFile() {
+    file.click();
+}
+reader.addEventListener("load", () => {
+    //reader.result
+});
+
+file.addEventListener("change", (e) => {
+    const files = event.target.files;
+    for (const f of files) {
+        thumbnail.src = URL.createObjectURL(f);
+        reader.readAsArrayBuffer(f);
+        break;
+    }
+});
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     const data = new FormData(e.target);
+//     alert([...data.entries()]);
+// });
 </script>
 </body>
 </html>

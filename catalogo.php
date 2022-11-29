@@ -27,10 +27,10 @@ else if (isset($_POST['btn-admin-delele']))
 }
 ?>
 <!DOCTYPE >
-<html style=" background-size: cover; background-image: url(Imagenes/fondo.jpg);  width: 100%;  height: 100%;}" >
+<html>
 <head>
 <meta charset="utf-8">
-<title>Catálogo de perros</title>
+<title>Catálogo</title>
 <link rel="stylesheet" type="text/css" href="css/navbar.css">
 <link rel="stylesheet" type="text/css" href="css/modal.css">
 <link rel="stylesheet" type="text/css" href="css/catalogo.css">
@@ -45,8 +45,10 @@ else if (isset($_POST['btn-admin-delele']))
 </div>
 <nav class="menu">
 <ul>
-<li><a href="nuevo.php">Nuevo Integrante</a></li> 
-<li>
+<li><a href="logout.php">Salir</a></li>
+<li><a href="nuevo.php">Nuevo Integrante</a></li>
+
+<li >
 <a href="#">
 Donaciones <img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOBJREFUSEvtlN0NwjAMhH2b0E3oJjAJMAlsQjehmxwyElHS5sdJyBt+q+r44u/sQAYHBteXv0CRsENE8i4ip+IJW8IDwFlTfYGXiBxs54tZK4BpK6DFnz8SmQEsgYB+kLyKyKV4v3zCDYDW+cRuTEn2oHJocgI9qCYAq99gdNEaUQVokh18f5BUw49GPxYAcyw3+VSQtKLacS8i8rqwTJUbyaoOjCJuY1MoTa9pYnSzaIom+zciqWar6X5k0VQJRLY8OpJNHmw60S1XNNGR7BYw7kSQZjK5pXC1B60iwzt4A/3qSxkbGxzrAAAAAElFTkSuQmCC" />
 </a>
@@ -55,7 +57,19 @@ Donaciones <img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 <li><a onclick="showEconomico()">Economico</a></li>
 </ul>
 </li>
+
+<li>
+<a href="#">
+Catalogo<img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAOBJREFUSEvtlN0NwjAMhH2b0E3oJjAJMAlsQjehmxwyElHS5sdJyBt+q+r44u/sQAYHBteXv0CRsENE8i4ip+IJW8IDwFlTfYGXiBxs54tZK4BpK6DFnz8SmQEsgYB+kLyKyKV4v3zCDYDW+cRuTEn2oHJocgI9qCYAq99gdNEaUQVokh18f5BUw49GPxYAcyw3+VSQtKLacS8i8rqwTJUbyaoOjCJuY1MoTa9pYnSzaIom+zciqWar6X5k0VQJRLY8OpJNHmw60S1XNNGR7BYw7kSQZjK5pXC1B60iwzt4A/3qSxkbGxzrAAAAAElFTkSuQmCC" />
+</a>
+<ul>
+<li><a href="catalogo.php?catalogo=gatos">Gatos</a></li>
+<li><a href="catalogo.php?catalogo=perros">Perros</a></li>
+</ul>
+</li>
+
 <li><a href="encuesta.php">Adoptar</a></li> 
+
 </ul>
 </nav>
 </header>
@@ -86,7 +100,10 @@ Donaciones <img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
 		<td><?php echo $row->Nombre;?></td>
 		<td><?php echo $row->Cantidad;?></td>
 		<td><?php echo $row->Fecha;?></td>
-        <td class="actions">
+
+       
+
+    <td class="actions">
         <div class="btn-actions">
         <form action="donaciones.php" method="POST">
         <input type="hidden" name="donacion" value="economico">
@@ -97,6 +114,7 @@ Donaciones <img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUg
         </form>
         </div>
         </td>
+       
 	</tr>
 <?php } ?>
 </tbody>
@@ -177,12 +195,17 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
 ?>
 <div class="card">
 <div class="card-header">
-<img src="Imagenes/Metri.PNG">
+<!-- <img src="Imagenes/Metri.PNG"> -->
+<img id="thumbnail" src="data:image/jpeg;base64,<?php echo(base64_encode($row->Foto))?>"/>
 </div>
 
 <div class="card-body" >
 <p><?php echo $row->Nombre; ?></p>
 <p><?php echo $row->Genero; ?></p>
+
+<?php
+ if ($_SESSION['tipoadmin'] == 'admin'){?>
+
 <div class="btns">
 <form action="nuevo.php" method="POST">
 <button type="submit" name="update-item" value="<?php echo($row->id);?>">Editar</button>
@@ -192,6 +215,9 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
 </form>
 </div>
 
+<?php
+ }
+?>
 
 </div>
 </div>

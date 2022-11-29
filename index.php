@@ -31,6 +31,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION['valid'] = true;
         $_SESSION['timeout'] = time();
         $_SESSION['username'] = $user;
+        $_SESSION['tipoadmin'] = $user-> tipoadmin;
         unset($pass);
         unset($_POST['password']);
         header('Refresh: 0; URL = index.php');
