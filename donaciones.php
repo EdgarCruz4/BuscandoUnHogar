@@ -105,6 +105,7 @@ if (isset($_POST['btn-edit'])) {
 <button type="submit" class="btn-action" id="btn-submit">Registrar</button>
 <?php }?>
 <button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?catalogo=gatos'">Cancelar</button>
+<!-- <button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?donacion=economico'">Cancelar</button> -->
 </div>
 </form>
 <?php }
@@ -112,6 +113,7 @@ else {
     $nombre = "";
     $especie = "";
     $cantidad = "";
+    $fecha = "";
     if (isset($_POST["btn-edit"]))
     {
         require_once("backend/function.php");
@@ -153,6 +155,7 @@ if (isset($_POST['btn-edit'])) {
 <button type="submit" class="btn-action" id="btn-submit">Registrar</button>
 <?php }?>
 <button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?catalogo=gatos'">Cancelar</button>
+<!-- <button type="button" id="btn-cancel" onclick="location.href = 'catalogo.php?donacion=especie'">Cancelar</button> -->
 </div>
 </form>
 <?php
