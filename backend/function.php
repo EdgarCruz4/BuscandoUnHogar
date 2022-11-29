@@ -10,10 +10,10 @@ require_once('config.php');
  */
 function db_query($query)
 {
-    global $host; global $username; global $password; global $dbname; global $port;
-    $connection = @mysqli_connect($host, $username, $password, $dbname, $port);
-    if (!$connection) { exit; } // Error: Unable to connect to MySQL. mysqli_connect_errno()
-    $result = @mysqli_query($connection, $query);
+    global $host; global $username; global $password; global $dbname; global $port; global $conn;
+    $conn = @mysqli_connect($host, $username, $password, $dbname, $port);
+    if (!$conn) { exit; } // Error: Unable to connect to MySQL. mysqli_connect_errno()
+    $result = @mysqli_query($conn, $query);
     return $result;
 }
 /**
