@@ -34,7 +34,7 @@
                                 <tr>
                                         <th>Nombre del solicitante</th>
                                         <th>Dirección</th>
-                                        <th>Telefono</th>
+                                        <th>Teléfono</th>
                                         <th>Motivo de adopción</th>
                                         <th>Mascota solicitada</th>
                                         <th>Especie</th>
@@ -59,7 +59,7 @@
                         </tbody>
                 </table>
                 <div class="button_l">
-                        <button onclick="window.location.href = 'index.php'">Regredar</button>
+                        <button onclick="window.location.href = 'index.php'">Regresar</button>
                 </div>
                 </div>
         </div>
