@@ -3,26 +3,33 @@ session_start();
 if (!isset($_SESSION['valid'])) {
     header('Refresh: 0; URL = index.php');
 } else {
+
+$catalogo = '';
+if (isset($_GET['catalogo']))
 $catalogo = $_GET['catalogo'];
+
 require_once("backend/function.php");
 if (isset($_POST["btn-delete"])) {
     $sql = deleteByID("donaciones", $_POST["btn-delete"]);
-    if (isset($sql)) echo('
+    if ($sql)
+    echo('
     <script>
     alert("Registro borrado con exito!.");
     </script>
     ');
+    die();
 }
-else if (isset($_POST['btn-admin-delele']))
+else if (isset($_POST['btn-admin-delete']))
 {
-    $sql = deleteByID("mascotas", $_POST['btn-admin-delele']);
+    $sql = deleteByID("mascotas", $_POST['btn-admin-delete']);
     if (isset($sql)) {
         echo('
         <script>
         alert("Registro borrado con exito!.");
         </script>
         ');
-        header('Refresh: 0; URL = index.php');
+        //header('Refresh: 0; URL = index.php');
+        header('Location:' . $_SERVER['HTTP_REFERER']);
     }
 }
 ?>
@@ -77,6 +84,7 @@ Catalogo<img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA
 <!-- Modal de donaciones en economicas -->
 <div onclick="closeModal()" id="donacion-economica" class="modal">
 <div class="modal-content">
+<span class="btn-close" onclick="closeModal()">X</span>
 <div class="content-header">
 <p id="modal-title">Donaciones Económicas</p>
 </div>
@@ -131,6 +139,7 @@ Catalogo<img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA
 <!-- Modal de donaciones en especie -->
 <div onclick="closeModal()" id="donacion-especie" class="modal">
 <div class="modal-content">
+<span class="btn-close" onclick="closeModal()">X</span>
 <div class="content-header">
 <p id="modal-title">Donaciones en Especie</p>
 </div>
@@ -211,7 +220,7 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
 <button type="submit" name="update-item" value="<?php echo($row->id);?>">Editar</button>
 </form>
 <form action="catalogo.php" method="POST" onsubmit="return confirm('Confirmar?');">
-<button type="submit" name="btn-admin-delele" value="<?php echo($row->id);?>">Eliminar</button>
+<button type="submit" name="btn-admin-delete" value="<?php echo($row->id);?>">Eliminar</button>
 </form>
 </div>
 
