@@ -47,9 +47,10 @@ else {
         echo('
             <script>
             alert("'. $message .'");
+            window.history.go(-2);
             </script>
             ');
-            header('Refresh: 0; URL = index.php');
+            // header('Refresh: 0; URL = index.php');
     } elseif (isset($_POST['btn-submit'])) {
         unset($_POST['btn-submit']);
         $sql = insert('mascotas', $_POST);
@@ -62,6 +63,7 @@ else {
         echo ('
         <script>
         alert("' . $message . '");
+        window.history.go(-2);
         </script>
         ');
     }
