@@ -119,19 +119,39 @@ if (isset($_POST['update-item'])) {?>
 <div>
 <div class="especie">
 <?php
-    if($especie == 'perro'){
-        ?>
-        <label for="especie">Perro</label>
-        <?php
+    if(isset($_POST['update-item']))
+    {
+        if($especie == 'perro'){
+            ?>
+            <label for="especie">Perro</label>
+            <?php
+        }else{
+            ?>
+            <label for="especie">Gato</label>
+            <?php
+        }
     }else{
         ?>
+        <input name="especie" type="radio" <?php echo($especie == 'perro' ? 'checked' : ''); ?> value="perro">
+        <label for="especie">Perro</label>
+        <input name="especie" type="radio" <?php echo($especie == 'gato' ? 'checked' : ''); ?> value="gato">
         <label for="especie">Gato</label>
         <?php
     }
 ?>
 
 </div>
-<input name="nombre" type="text" value="<?php echo($nombre); ?>" disabled>
+<?php
+if (isset($_POST['update-item'])){
+    ?>
+    <input name="nombre" type="text" value="<?php echo($nombre); ?>" disabled>
+    <?php
+}else{
+    ?>
+    <input name="nombre" type="text" value="<?php echo($nombre); ?>">
+    <?php
+}
+?>
 <input name="edad" type="number" min="1" value="<?php echo($edad); ?>">
 <select id="genero" name="genero" style="width: 160px; border-radius: 8px; padding-top: 2px; padding-bottom: 2px;">
 <option <?php echo($genero == 'Macho' ? 'selected' : ''); ?>>Macho</option>
