@@ -49,7 +49,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 <div class="modal-content">
 <div class="content-header">
 <div class="content">
-<p id="modal-title">Inicio de sesion</p>
+<p id="modal-title">Inicio de sesión</p>
 <div class="footprint">
 <div class="user-icon"></div>
 </div>
