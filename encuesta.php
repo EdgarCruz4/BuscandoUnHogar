@@ -93,7 +93,7 @@ if (!isset($_SESSION['valid'])) {
 </table> 
 </div>
 <div class="btn">
-<button type="button" onclick="window.location.href = 'index.php'" id="btn-cancel">Cancelar</button>
+<button type="button" onclick="window.history.back();" id="btn-cancel">Cancelar</button>
 <button type="button" id="btn-submit">Enviar</button>
 </div>
 </form>

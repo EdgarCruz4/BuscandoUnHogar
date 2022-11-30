@@ -162,7 +162,7 @@ if (isset($_POST['update-item'])){
 </div>
 </div>
 <div class="btn">
-<button type="reset" onclick="window.location.href = 'index.php'" id="btn-reset">Cancelar</button>
+<button type="reset" onclick="window.history.back();" id="btn-reset">Cancelar</button>
 <?php
 if (isset($_POST['update-item'])) {?>
     <button type="submit" name="btn-update" value="<?php echo($id);?>">Actualizar</button>
