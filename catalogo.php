@@ -74,7 +74,7 @@ Catalogo<img class="flecha" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA
 </ul>
 </li>
 
-<li><a href="encuesta.php">Adoptar</a></li> 
+<li><a href="listaAdopciones.php">Solicitudes de Adopción</a></li> 
 
 </ul>
 </nav>
