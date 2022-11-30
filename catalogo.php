@@ -17,7 +17,7 @@ if (isset($_POST["btn-delete"])) {
     alert("Registro borrado con exito!.");
     </script>
     ');
-    die();
+    header('Location:' . $_SERVER['HTTP_REFERER']);
 }
 else if (isset($_POST['btn-admin-delete']))
 {
