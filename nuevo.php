@@ -114,7 +114,7 @@ if (isset($_POST['update-item'])) {?>
 <label for="mascota">Mascota:</label>
 <label for="nombre">Nombre:</label>
 <label for="edad">Edad:</label>
-<label for="genero">Genero:</label>
+<label for="genero">Género:</label>
 <label for="tamano">Tamaño:</label>
 <label for="descripcion">Descripción:</label>
 </div>

@@ -240,7 +240,7 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
 
 <!-- Footer -->
 <footer class="container" >
-<span>Todos los derechos reservados ®2022, prohibidad su reproducción total o parcial sin autorización.</span>
+<span>Todos los derechos reservados ®2022, prohibida su reproducción total o parcial sin autorización.</span>
 </footer>
 
 <script>
