@@ -38,6 +38,7 @@
                                         <th>Motivo de adopción</th>
                                         <th>Mascota solicitada</th>
                                         <th>Especie</th>
+                                        <th>Eliminar</th>
                                 </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,12 @@
                                         <td><?php echo $lista['Motivo'];?></td>
                                         <td><?php echo $lista['MascotaS'];?></td>
                                         <td><?php echo $lista['Tipo'];?></td>
+                                        <td>
+                                                <form method="POST" action="backend/eliminarAd.php">
+                                                        <input type="hidden" name="id" value="<?php echo $lista['id']?>">
+                                                        <button>Eliminar</button>
+                                                </form>
+                                        </td>
                                 </tr>
                                 <?php
                                 }
