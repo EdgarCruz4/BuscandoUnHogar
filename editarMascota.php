@@ -61,7 +61,7 @@ while ($row = mysqli_fetch_object($rows)) { // draw each row returned
 <div class="labels">
 <label for="nombre">Nombre:</label>
 <label for="edad">Edad:</label>
-<label for="genero">Genero:</label>
+<label for="genero">Género:</label>
 <label for="tamano">Tamaño:</label>
 <label for="descripcion">Descripcion:</label>
 </div>

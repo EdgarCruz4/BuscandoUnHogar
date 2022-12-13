@@ -83,7 +83,7 @@ if (isset($_POST["btn-delete"])) {
 <th>Nombre</th>
 <th>Especie</th>
 <th>Cantidad</th>
-<th>Accion</th>
+<th>Acción</th>
 </tr>
 </thead>
 <tbody>

@@ -12,6 +12,15 @@ else {
     $genero = '';
     $tamano = '';
     $descripcion = '';
+    $foto = null;
+
+    if (count($_FILES) > 0) {
+        if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
+            $imgData = file_get_contents($_FILES['foto']['tmp_name']);
+            $imgType = $_FILES['foto']['type'];
+            $_POST['Foto'] = addslashes($imgData);
+        }
+    }
 
     if (isset($_POST['update-item'])) {
         $id = $_POST['update-item'];
@@ -23,6 +32,7 @@ else {
             $genero = $row->Genero;
             $tamano = $row->Tamano;
             $descripcion = $row->Descripcion;
+            $foto = $row->Foto;
         }
     } elseif (isset($_POST['btn-update'])) {
         $id = $_POST['btn-update'];
@@ -37,9 +47,10 @@ else {
         echo('
             <script>
             alert("'. $message .'");
+            window.history.go(-2);
             </script>
             ');
-            header('Refresh: 0; URL = index.php');
+            // header('Refresh: 0; URL = index.php');
     } elseif (isset($_POST['btn-submit'])) {
         unset($_POST['btn-submit']);
         $sql = insert('mascotas', $_POST);
@@ -49,11 +60,12 @@ else {
         } else {
             $message = 'Ocurrio un error al hacer el registro.\nPor favor intenta de nuevo.';
         }
-        echo('
-            <script>
-            alert("'. $message .'");
-            </script>
-            ');
+        echo ('
+        <script>
+        alert("' . $message . '");
+        window.history.go(-2);
+        </script>
+        ');
     }
 ?>
 <!DOCTYPE html>
@@ -75,7 +87,18 @@ else {
 <div class="modal">
 <div class="modal-content">
 <div class="content-left">
-<p>Subir Imagen</p>
+<label onclick="openFile();">
+<?php
+if (isset($_POST['update-item'])) {?>
+<img src="data:image/jpeg;base64,<?php echo(base64_encode($foto))?>" id="thumbnail" alt="Subir imagen" style="width: 100%; height: 100%;">
+<?php
+} else {
+?>
+<img src="" id="thumbnail" alt="Subir imagen" style="width: 100%; height: 100%;">
+<?php
+}
+?>
+</label>
 </div>
 <div class="content-right">
 <div class="content-header">
@@ -84,26 +107,55 @@ else {
 </div>
 </div>
 <div class="content-body">
-<form action="nuevo.php" method="POST" onsubmit="return confirm('Confirmar?');">
+<form id="form" action="nuevo.php" method="POST" onsubmit="return confirm('Confirmar?');" enctype="multipart/form-data">
+<input type="file" name="foto" id="upload-photo">
 <div class="form-content">
 <div class="labels">
 <label for="mascota">Mascota:</label>
 <label for="nombre">Nombre:</label>
 <label for="edad">Edad:</label>
-<label for="genero">Genero:</label>
+<label for="genero">Género:</label>
 <label for="tamano">Tamaño:</label>
-<label for="descripcion">Descripcion:</label>
+<label for="descripcion">Descripción:</label>
 </div>
 <div>
 <div class="especie">
-<input name="especie" type="radio" <?php echo($especie == 'perro' ? 'checked' : ''); ?> value="perro">
-<label for="especie">Perro</label>
-<input name="especie" type="radio" <?php echo($especie == 'gato' ? 'checked' : ''); ?> value="gato">
-<label for="especie">Gato</label>
+<?php
+    if(isset($_POST['update-item']))
+    {
+        if($especie == 'perro'){
+            ?>
+            <label for="especie">Perro</label>
+            <?php
+        }else{
+            ?>
+            <label for="especie">Gato</label>
+            <?php
+        }
+    }else{
+        ?>
+        <input name="especie" type="radio" <?php echo($especie == 'perro' ? 'checked' : ''); ?> value="perro">
+        <label for="especie">Perro</label>
+        <input name="especie" type="radio" <?php echo($especie == 'gato' ? 'checked' : ''); ?> value="gato">
+        <label for="especie">Gato</label>
+        <?php
+    }
+?>
+
 </div>
-<input name="nombre" type="text" value="<?php echo($nombre); ?>">
+<?php
+if (isset($_POST['update-item'])){
+    ?>
+    <input name="nombre" type="text" value="<?php echo($nombre); ?>" disabled>
+    <?php
+}else{
+    ?>
+    <input name="nombre" type="text" value="<?php echo($nombre); ?>">
+    <?php
+}
+?>
 <input name="edad" type="number" min="1" value="<?php echo($edad); ?>">
-<select id="genero" name="genero">
+<select id="genero" name="genero" style="width: 160px; border-radius: 8px; padding-top: 2px; padding-bottom: 2px;">
 <option <?php echo($genero == 'Macho' ? 'selected' : ''); ?>>Macho</option>
 <option <?php echo($genero == 'Hembra' ? 'selected' : ''); ?>>Hembra</option>
 </select>
@@ -112,7 +164,7 @@ else {
 </div>
 </div>
 <div class="btn">
-<button type="reset" onclick="window.location.href = 'index.php'" id="btn-reset">Cancelar</button>
+<button type="reset" onclick="window.history.back();" id="btn-reset">Cancelar</button>
 <?php
 if (isset($_POST['update-item'])) {?>
     <button type="submit" name="btn-update" value="<?php echo($id);?>">Actualizar</button>
@@ -127,10 +179,35 @@ if (isset($_POST['update-item'])) {?>
 </form>
 </div>
 </div>
-
 </div>
 </div>
 <script>
+let form = document.getElementById("form");
+let file = document.getElementById("upload-photo");
+let thumbnail = document.getElementById("thumbnail");
+const reader = new FileReader();
+
+function openFile() {
+    file.click();
+}
+reader.addEventListener("load", () => {
+    //reader.result
+});
+
+file.addEventListener("change", (e) => {
+    const files = event.target.files;
+    for (const f of files) {
+        thumbnail.src = URL.createObjectURL(f);
+        reader.readAsArrayBuffer(f);
+        break;
+    }
+});
+
+// form.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     const data = new FormData(e.target);
+//     alert([...data.entries()]);
+// });
 </script>
 </body>
 </html>
