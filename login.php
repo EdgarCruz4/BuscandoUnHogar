@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +17,31 @@
 <h1>Buscando Un Hogar</h1>
 </div>
 </header>
+<?php
+$msg = '';
+if (!empty($_POST['username']) && !empty($_POST['password'])) {
+
+    include_once('./backend/function.php');
+    $user = query('admins', 'username', $_POST['username']);
+    $pass = query('admins', 'password', $_POST['password']);
+    if (isset($user) && isset($pass)) {
+        $_SESSION['valid'] = true;
+        $_SESSION['timeout'] = time();
+        $_SESSION['username'] = $user;
+        unset($pass);
+        unset($_POST['password']);
+        $msg = 'You have entered valid username and password';
+        header('Refresh: 2; URL = index.php');
+    } else {
+        $msg = 'Wrong username or password';
+        echo('
+        <script>
+        alert("' . $msg . '");
+        </script>
+        ');
+    }
+}
+?>
 <div class="modal">
 <div class="modal-content">
 <div class="content-header">
@@ -25,7 +53,7 @@
 </div>
 </div>
 <div class="content-body">
-<form action="">
+<form action = "login.php" method = "post">
 <div class="form-content">
 <div>
 <div class="input-user"><label for="username">Usuario:</label></div>
@@ -33,9 +61,9 @@
 <div class="input-pass"><label for="password">Contraseña:</label></div>
 </div>
 <div>
-<input name="username" type="text" placeholder="Juan">
+<input name="username" type="text" placeholder="">
 <br>
-<input name="password" type="password" placeholder="12345">
+<input name="password" type="password" placeholder="">
 </div>
 </div>
 <div class="btn">
