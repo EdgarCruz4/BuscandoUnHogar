@@ -4,34 +4,41 @@ if (!isset($_SESSION['valid'])) {
     header('Refresh: 0; URL = index.php');
 }
 else {
+$donacion = '';
+if (isset($_POST["donacion"]))
 $donacion = $_POST["donacion"];
+
 require_once("backend/function.php");
 if(isset($_POST['tipo']) && !isset($_POST['btn-update'])) {
     $sql = insert('donaciones', $_POST);
-    if ($sql)
+    if ($sql) {
         echo ('
         <script>
         alert("Donacion registrada correctamente.");
+        history.go(-2);
         </script>
         ');
-    else
+    }
+    else {
         echo ('
         <script>
         alert("Ocurrio un error al realizar su registro.\nPor favor vuelva a intertarlo.");
+        history.go(-2);
         </script>
         ');
+    }
 }
 if (isset($_POST['btn-update'])) {
     $id = $_POST['btn-update'];
     unset($_POST['btn-update']);
     $sql = update('donaciones', $_POST, "id='" . $id . "'");
-    if (isset($sql)) {
+    if ($sql) {
         echo ('
         <script>
         alert("Registro actualizado.");
+        history.go(-2);
         </script>
         ');
-        header('Refresh: 0; URL = catalogo.php?catalogo=gatos');
     }
 }
 ?>
@@ -100,12 +107,11 @@ if ($donacion == "economico")
 <?php
 if (isset($_POST['btn-edit'])) {
 ?>
-<button type="submit" class="btn-action" id="btn-submit" name="btn-update" value="<?php echo($id); ?>">Actualizar</button>
+<button type="submit" class="btn-action" id="btn-update" name="btn-update" value="<?php echo($id); ?>">Actualizar</button>
 <?php } else {?>
 <button type="submit" class="btn-action" id="btn-submit">Registrar</button>
 <?php }?>
-<button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?catalogo=gatos'">Cancelar</button>
-<!-- <button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?donacion=economico'">Cancelar</button> -->
+<button type="button" class="btn-action" id="btn-cancel" onclick="window.history.back();">Cancelar</button>
 </div>
 </form>
 <?php }
@@ -113,7 +119,6 @@ else {
     $nombre = "";
     $especie = "";
     $cantidad = "";
-    $fecha = "";
     if (isset($_POST["btn-edit"]))
     {
         require_once("backend/function.php");
@@ -150,12 +155,11 @@ else {
 <?php
 if (isset($_POST['btn-edit'])) {
 ?>
-<button type="submit" class="btn-action" id="btn-submit" name="btn-update" value="<?php echo($id); ?>">Actualizar</button>
+<button type="submit" class="btn-action" id="btn-update" name="btn-update" value="<?php echo($id); ?>">Actualizar</button>
 <?php } else {?>
 <button type="submit" class="btn-action" id="btn-submit">Registrar</button>
 <?php }?>
-<button type="button" class="btn-action" id="btn-cancel" onclick="location.href = 'catalogo.php?catalogo=gatos'">Cancelar</button>
-<!-- <button type="button" id="btn-cancel" onclick="location.href = 'catalogo.php?donacion=especie'">Cancelar</button> -->
+<button type="button" class="btn-action" id="btn-cancel" onclick="window.history.back();">Cancelar</button>
 </div>
 </form>
 <?php

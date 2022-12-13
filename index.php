@@ -31,6 +31,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $_SESSION['valid'] = true;
         $_SESSION['timeout'] = time();
         $_SESSION['username'] = $user;
+        $_SESSION['tipoadmin'] = $user-> tipoadmin;
         unset($pass);
         unset($_POST['password']);
         header('Refresh: 0; URL = index.php');
@@ -48,7 +49,7 @@ if (!empty($_POST['username']) && !empty($_POST['password'])) {
 <div class="modal-content">
 <div class="content-header">
 <div class="content">
-<p id="modal-title">Inicio de sesion</p>
+<p id="modal-title">Inicio de sesión</p>
 <div class="footprint">
 <div class="user-icon"></div>
 </div>
